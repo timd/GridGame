@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TestingTemplatesViewController : UIViewController
+@interface GridGameViewController : UIViewController
 
 @end

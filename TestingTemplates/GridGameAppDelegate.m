@@ -6,11 +6,11 @@
 //  Copyright 2011 Charismatic Megafauna Ltd. All rights reserved.
 //
 
-#import "TestingTemplatesAppDelegate.h"
+#import "GridGameAppDelegate.h"
 
-#import "TestingTemplatesViewController.h"
+#import "GridGameViewController.h"
 
-@implementation TestingTemplatesAppDelegate
+@implementation GridGameAppDelegate
 
 @synthesize window = _window;
 @synthesize viewController = _viewController;

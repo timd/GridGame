@@ -6,9 +6,9 @@
 //  Copyright 2011 Charismatic Megafauna Ltd. All rights reserved.
 //
 
-#import "TestingTemplatesViewController.h"
+#import "GridGameViewController.h"
 
-@implementation TestingTemplatesViewController
+@implementation GridGameViewController
 
 - (void)didReceiveMemoryWarning
 {

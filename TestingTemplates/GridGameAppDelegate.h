@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@class TestingTemplatesViewController;
+@class GridGameViewController;
 
-@interface TestingTemplatesAppDelegate : NSObject <UIApplicationDelegate>
+@interface GridGameAppDelegate : NSObject <UIApplicationDelegate>
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 
-@property (nonatomic, retain) IBOutlet TestingTemplatesViewController *viewController;
+@property (nonatomic, retain) IBOutlet GridGameViewController *viewController;
 
 @end

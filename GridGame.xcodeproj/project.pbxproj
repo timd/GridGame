@@ -12,10 +12,10 @@
 		2221C871141F66E3005E9538 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2221C870141F66E3005E9538 /* CoreGraphics.framework */; };
 		2221C877141F66E3005E9538 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2221C875141F66E3005E9538 /* InfoPlist.strings */; };
 		2221C879141F66E3005E9538 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2221C878141F66E3005E9538 /* main.m */; };
-		2221C87D141F66E3005E9538 /* TestingTemplatesAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2221C87C141F66E3005E9538 /* TestingTemplatesAppDelegate.m */; };
+		2221C87D141F66E3005E9538 /* GridGameAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2221C87C141F66E3005E9538 /* GridGameAppDelegate.m */; };
 		2221C880141F66E3005E9538 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2221C87E141F66E3005E9538 /* MainWindow.xib */; };
-		2221C883141F66E4005E9538 /* TestingTemplatesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2221C882141F66E4005E9538 /* TestingTemplatesViewController.m */; };
-		2221C886141F66E4005E9538 /* TestingTemplatesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2221C884141F66E4005E9538 /* TestingTemplatesViewController.xib */; };
+		2221C883141F66E4005E9538 /* GridGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2221C882141F66E4005E9538 /* GridGameViewController.m */; };
+		2221C886141F66E4005E9538 /* GridGameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2221C884141F66E4005E9538 /* GridGameViewController.xib */; };
 		2221C892141F66F0005E9538 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2221C86C141F66E3005E9538 /* UIKit.framework */; };
 		2221C893141F66F0005E9538 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2221C86E141F66E3005E9538 /* Foundation.framework */; };
 		2221C894141F66F0005E9538 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2221C870141F66E3005E9538 /* CoreGraphics.framework */; };
@@ -47,16 +47,16 @@
 		2221C86C141F66E3005E9538 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2221C86E141F66E3005E9538 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2221C870141F66E3005E9538 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		2221C874141F66E3005E9538 /* GridGame-Info.plist */ = {isa = PBXFileReference; path = "GridGame-Info.plist"; sourceTree = "<group>"; };
+		2221C874141F66E3005E9538 /* GridGame-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GridGame-Info.plist"; sourceTree = "<group>"; };
 		2221C876141F66E3005E9538 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2221C878141F66E3005E9538 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		2221C87A141F66E3005E9538 /* GridGame-Prefix.pch */ = {isa = PBXFileReference; path = "GridGame-Prefix.pch"; sourceTree = "<group>"; };
-		2221C87B141F66E3005E9538 /* TestingTemplatesAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestingTemplatesAppDelegate.h; sourceTree = "<group>"; };
-		2221C87C141F66E3005E9538 /* TestingTemplatesAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestingTemplatesAppDelegate.m; sourceTree = "<group>"; };
+		2221C87A141F66E3005E9538 /* GridGame-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GridGame-Prefix.pch"; sourceTree = "<group>"; };
+		2221C87B141F66E3005E9538 /* GridGameAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GridGameAppDelegate.h; sourceTree = "<group>"; };
+		2221C87C141F66E3005E9538 /* GridGameAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GridGameAppDelegate.m; sourceTree = "<group>"; };
 		2221C87F141F66E3005E9538 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
-		2221C881141F66E3005E9538 /* TestingTemplatesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestingTemplatesViewController.h; sourceTree = "<group>"; };
-		2221C882141F66E4005E9538 /* TestingTemplatesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestingTemplatesViewController.m; sourceTree = "<group>"; };
-		2221C885141F66E4005E9538 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/TestingTemplatesViewController.xib; sourceTree = "<group>"; };
+		2221C881141F66E3005E9538 /* GridGameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GridGameViewController.h; sourceTree = "<group>"; };
+		2221C882141F66E4005E9538 /* GridGameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GridGameViewController.m; sourceTree = "<group>"; };
+		2221C885141F66E4005E9538 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/GridGameViewController.xib; sourceTree = "<group>"; };
 		2221C890141F66F0005E9538 /* Tests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2221C897141F66F0005E9538 /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tests-Info.plist"; sourceTree = "<group>"; };
 		2221C899141F66F0005E9538 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -98,7 +98,7 @@
 		2221C85D141F66E3005E9538 = {
 			isa = PBXGroup;
 			children = (
-				2221C872141F66E3005E9538 /* TestingTemplates */,
+				2221C872141F66E3005E9538 /* GridGame */,
 				2221C895141F66F0005E9538 /* Tests */,
 				2221C86B141F66E3005E9538 /* Frameworks */,
 				2221C869141F66E3005E9538 /* Products */,
@@ -127,17 +127,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		2221C872141F66E3005E9538 /* TestingTemplates */ = {
+		2221C872141F66E3005E9538 /* GridGame */ = {
 			isa = PBXGroup;
 			children = (
-				2221C87B141F66E3005E9538 /* TestingTemplatesAppDelegate.h */,
-				2221C87C141F66E3005E9538 /* TestingTemplatesAppDelegate.m */,
-				2221C87E141F66E3005E9538 /* MainWindow.xib */,
-				2221C881141F66E3005E9538 /* TestingTemplatesViewController.h */,
-				2221C882141F66E4005E9538 /* TestingTemplatesViewController.m */,
-				2221C884141F66E4005E9538 /* TestingTemplatesViewController.xib */,
+				2221C8C1141F8378005E9538 /* App controllers */,
+				2221C8C2141F838A005E9538 /* View controllers */,
+				2221C8C3141F8391005E9538 /* Views */,
 				2221C873141F66E3005E9538 /* Supporting Files */,
 			);
+			name = GridGame;
 			path = TestingTemplates;
 			sourceTree = "<group>";
 		};
@@ -178,6 +176,33 @@
 				2221C8B8141F6A7B005E9538 /* TestTemplate.m */,
 			);
 			name = "Test files";
+			sourceTree = "<group>";
+		};
+		2221C8C1141F8378005E9538 /* App controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2221C87B141F66E3005E9538 /* GridGameAppDelegate.h */,
+				2221C87C141F66E3005E9538 /* GridGameAppDelegate.m */,
+			);
+			name = "App controllers";
+			sourceTree = "<group>";
+		};
+		2221C8C2141F838A005E9538 /* View controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2221C881141F66E3005E9538 /* GridGameViewController.h */,
+				2221C882141F66E4005E9538 /* GridGameViewController.m */,
+			);
+			name = "View controllers";
+			sourceTree = "<group>";
+		};
+		2221C8C3141F8391005E9538 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2221C884141F66E4005E9538 /* GridGameViewController.xib */,
+				2221C87E141F66E3005E9538 /* MainWindow.xib */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -251,7 +276,7 @@
 			files = (
 				2221C877141F66E3005E9538 /* InfoPlist.strings in Resources */,
 				2221C880141F66E3005E9538 /* MainWindow.xib in Resources */,
-				2221C886141F66E4005E9538 /* TestingTemplatesViewController.xib in Resources */,
+				2221C886141F66E4005E9538 /* GridGameViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,8 +296,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2221C879141F66E3005E9538 /* main.m in Sources */,
-				2221C87D141F66E3005E9538 /* TestingTemplatesAppDelegate.m in Sources */,
-				2221C883141F66E4005E9538 /* TestingTemplatesViewController.m in Sources */,
+				2221C87D141F66E3005E9538 /* GridGameAppDelegate.m in Sources */,
+				2221C883141F66E4005E9538 /* GridGameViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,12 +329,12 @@
 			name = MainWindow.xib;
 			sourceTree = "<group>";
 		};
-		2221C884141F66E4005E9538 /* TestingTemplatesViewController.xib */ = {
+		2221C884141F66E4005E9538 /* GridGameViewController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				2221C885141F66E4005E9538 /* en */,
 			);
-			name = TestingTemplatesViewController.xib;
+			name = GridGameViewController.xib;
 			sourceTree = "<group>";
 		};
 		2221C898141F66F0005E9538 /* InfoPlist.strings */ = {

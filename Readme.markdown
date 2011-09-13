@@ -1,24 +1,11 @@
-# iOS Test Rig
+# GridGame
 
-An iOS template application with GHUnit and OCMock
+The grid-based memory game for C4's Food Hospital iOS app
 http://adoptioncurve.net/foodhospital
 
 ===================================================
 
-An XCode template for test-driven development for
-iOS, using GHUnit and OCMock.
-
-Consists of two targets - the main application, and
-the test application.
-
-The test application includes the GHUnit and OCMock
-libraries.  Tests can be modelled on the 
-TestTemplate.m file located in the Test files
-group.
-
-===================================================
-
-### Version         :   1.0
+### Version         :   0.1
 ### Branch          :   master
 ### Branched from   :   n/a
 ### Merged with     :  	n/a
@@ -26,9 +13,27 @@ group.
 
 ===================================================
 
-Tim Duckett
+# NOTES
+
+# BRANCH PURPOSE
+- build grid
+
+### Completed:
+- initial commit to project
+
+### In progress:
+
+### Todo:
+
+### Icebox:
+
+===================================================
+
+(c) Tim Duckett, 2011
 tim@adoptioncurve.net
 http://www.adoptioncurve.net
+
+All rights reserved.
 
 ===================================================
 
@@ -40,4 +45,5 @@ http://www.adoptioncurve.net
 # DEPENDENCIES
 - GHUnit 					- https://github.com/gabriel/gh-unit
 - OCMock 					- http://ocmock.org/
+
 ===================================================

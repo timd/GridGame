@@ -8,6 +8,26 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GridGameViewController : UIViewController
+@interface GridGameViewController : UIViewController {
+    
+    int points;
+    int wins;
+    int lives;
+    int rows;
+    int columns;
+    
+}
+
+- (UIView *)createGridWithRows:(int)numberOfRows andColumns:(int)numberOfColumns;
+- (UIImage *)backgroundImageForRows:(int)numberOfRows andColumns:(int)numberOfColumns;
+    
+-(float)calculateWidthOfGridFor:(int)numberOfColumns;
+-(float)calculateHeightOfGridFor:(int)numberOfRows;
+-(float)calculateXoffsetForGridWithColumns:(int)numberOfColumns;
+-(NSArray *)createArrayOfPositionsForRows:(int)noOfRows andColumns:(int)noOfCols;
+-(UIView *)addButtonsToView:(UIView *)theView atPositions:(NSArray *)positionsArray;
+
+-(IBAction)didTapGridButton:(id)sender;
+
 
 @end

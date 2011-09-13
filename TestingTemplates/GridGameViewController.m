@@ -66,16 +66,84 @@
     rows = 5;
     
     // Create and show new grid
-    UIView *gridView = [self createGridWithRows:rows andColumns:columns];
-    
     NSArray *xyPositions = [self createArrayOfPositionsForRows:rows andColumns:columns];
+
+
+    NSArray *tagsArray = [self generateArrayOfFilledBlocksForRows:rows andColumns:columns];
+    NSLog(@"tagsArray = %@", tagsArray);
+
+    // Create a blank grid
+    UIView *startingGrid = [self createGridWithRows:rows andColumns:columns];
+    UIView *buttonGrid = [self createGridWithRows:rows andColumns:columns];
     
-    // Load buttons onto the view
-    UIView *beButtonedView = [self addButtonsToView:gridView atPositions:xyPositions];
+    // Create the buttoned grid
+    UIView *beButtonedView = [self addButtonsToView:buttonGrid atPositions:xyPositions];
+    UIView *unButtonedView = [self addSubviewsToView:startingGrid atPositions:xyPositions];
+    
+    NSArray *theArray = [NSArray arrayWithObjects:[NSNumber numberWithInt:21],
+                         [NSNumber numberWithInt:32], nil];
+    
+    UIView *blockedUpView = [self addBlocksFromArray:theArray ToGrid:unButtonedView];
     
     [self.view addSubview:beButtonedView];
+    [beButtonedView setUserInteractionEnabled:NO];
+    
+    [self.view addSubview:blockedUpView];
 
+    [UIView animateWithDuration:1.0 delay:5.0 options:UIViewAnimationCurveLinear animations:^{
+        [blockedUpView setAlpha:0];
+    }
+                     completion:^(BOOL finished) {
+                         [beButtonedView setUserInteractionEnabled:YES];
+                     }];
+    
+     //    [startingGrid setAlpha:0];
+    
+
+    
 }
+
+-(NSArray *)generateArrayOfFilledBlocksForRows:(int)bRows andColumns:(int)bColumns {
+
+    NSMutableArray *tagsArray = [[NSMutableArray alloc] init];
+    
+    for (int rInt = 1; rInt <= bRows; rInt++) {
+        
+        int rowStem = rInt * 10;
+        
+        for (int cInt = 1; cInt <= bColumns; cInt++) {
+            
+            int tagInt = rowStem + cInt;
+            [tagsArray addObject:[NSNumber numberWithInt:tagInt]];
+            
+        }
+    }
+    
+    NSArray *returnArray = [[NSArray arrayWithArray:tagsArray] autorelease];
+    
+    return returnArray;
+    
+}
+
+-(UIView *)addBlocksFromArray:(NSArray *)theArray ToGrid:(UIView *)theGrid {
+
+    for (NSNumber *tagAsNum in theArray) {
+        
+        int tagInt = [tagAsNum intValue];
+        
+        for (UIView *subView in theGrid.subviews) {
+            if (subView.tag == tagInt) {
+                UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"blueButtonBackground"]];
+                [subView addSubview:imageView];
+            }
+        }
+        
+    }
+    
+    return theGrid;
+    
+}
+
 
 -(IBAction)didTapGridButton:(id)sender {
     
@@ -127,6 +195,41 @@
     return theView;
     
 }
+
+-(UIView *)addSubviewsToView:(UIView *)theView atPositions:(NSArray *)positionsArray {
+    
+    for (NSArray *coords in positionsArray) {
+        
+        // Extract the x/y coords
+        float xCoord = [[coords objectAtIndex:0] floatValue];
+        float yCoord = [[coords objectAtIndex:1] floatValue];
+        NSString *tagString = [coords objectAtIndex:2];        
+        
+        int intXCoord = (int)xCoord;
+        int intYCoord = (int)yCoord;
+        
+        int tagInt = [tagString intValue];
+        
+        NSLog(@"Floats: X/Y = %f/%f", xCoord, yCoord);
+        NSLog(@"Ints: X/Y = %d/%d", intXCoord, intYCoord);
+        NSLog(@"tagString = %@", tagString);
+        NSLog(@"tagInt = %d", tagInt);
+        NSLog(@"=========================");
+        
+        // Create a button at the x/y coordinates
+        //        UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        UIView *subView = [[UIView alloc] initWithFrame:CGRectMake(xCoord, yCoord, 60, 60)];
+        [subView setTag:tagInt];
+        
+        // add the button to the gridView
+        [theView addSubview:subView];
+        
+    }
+    
+    return theView;
+    
+}
+
 
 -(NSArray *)createArrayOfPositionsForRows:(int)noOfRows andColumns:(int)noOfCols {
     

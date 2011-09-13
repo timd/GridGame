@@ -26,6 +26,10 @@
 -(float)calculateXoffsetForGridWithColumns:(int)numberOfColumns;
 -(NSArray *)createArrayOfPositionsForRows:(int)noOfRows andColumns:(int)noOfCols;
 -(UIView *)addButtonsToView:(UIView *)theView atPositions:(NSArray *)positionsArray;
+-(UIView *)addSubviewsToView:(UIView *)theView atPositions:(NSArray *)positionsArray;
+-(UIView *)addBlocksFromArray:(NSArray *)theArray ToGrid:(UIView *)theGrid;
+-(NSArray *)generateArrayOfFilledBlocksForRows:(int)rows andColumns:(int)columns;
+
 
 -(IBAction)didTapGridButton:(id)sender;
 

@@ -20,8 +20,11 @@ http://adoptioncurve.net/foodhospital
 
 ### Completed:
 - initial commit to project
+- basic game structure
 
 ### In progress:
+- adding win/lose logic to submitButtonTapped
+- writing tests for win/lose logic
 
 ### Todo:
 

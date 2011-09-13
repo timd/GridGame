@@ -25,7 +25,6 @@
 		2221C8B2141F698F005E9538 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2221C8B1141F698F005E9538 /* OCMock.framework */; };
 		2221C8B4141F69BA005E9538 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2221C8B3141F69BA005E9538 /* libOCMock.a */; };
 		2221C8B6141F69EF005E9538 /* OCMock.framework in Copy OCMock */ = {isa = PBXBuildFile; fileRef = 2221C8B1141F698F005E9538 /* OCMock.framework */; };
-		2221C8B9141F6A7C005E9538 /* TestTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2221C8B8141F6A7B005E9538 /* TestTemplate.m */; };
 		2221C8C5141F84C9005E9538 /* GridView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2221C8C4141F84C9005E9538 /* GridView.xib */; };
 		2221C8C6141F84C9005E9538 /* GridView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2221C8C4141F84C9005E9538 /* GridView.xib */; };
 		2221C8D1141FACD7005E9538 /* 3x3.png in Resources */ = {isa = PBXBuildFile; fileRef = 2221C8C7141FACD6005E9538 /* 3x3.png */; };
@@ -58,6 +57,7 @@
 		2221C8F4141FD417005E9538 /* blueButtonBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 2221C8F1141FD417005E9538 /* blueButtonBackground.png */; };
 		2221C8F5141FD417005E9538 /* blueButtonBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2221C8F2141FD417005E9538 /* blueButtonBackground@2x.png */; };
 		2221C8F6141FD417005E9538 /* blueButtonBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2221C8F2141FD417005E9538 /* blueButtonBackground@2x.png */; };
+		2221C8F914200520005E9538 /* GameLogicTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2221C8F814200520005E9538 /* GameLogicTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -114,6 +114,7 @@
 		2221C8EB141FD321005E9538 /* whiteButtonBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteButtonBackground.png; sourceTree = "<group>"; };
 		2221C8F1141FD417005E9538 /* blueButtonBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueButtonBackground.png; sourceTree = "<group>"; };
 		2221C8F2141FD417005E9538 /* blueButtonBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blueButtonBackground@2x.png"; sourceTree = "<group>"; };
+		2221C8F814200520005E9538 /* GameLogicTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameLogicTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,6 +224,7 @@
 			children = (
 				2221C8B8141F6A7B005E9538 /* TestTemplate.m */,
 				2221C8E7141FAE8F005E9538 /* GridGameViewControllerTests.m */,
+				2221C8F814200520005E9538 /* GameLogicTests.m */,
 			);
 			name = "Test files";
 			sourceTree = "<group>";
@@ -417,8 +419,8 @@
 			files = (
 				2221C8E9141FB000005E9538 /* GridGameViewController.m in Sources */,
 				2221C89C141F66F0005E9538 /* main.m in Sources */,
-				2221C8B9141F6A7C005E9538 /* TestTemplate.m in Sources */,
 				2221C8E8141FAE8F005E9538 /* GridGameViewControllerTests.m in Sources */,
+				2221C8F914200520005E9538 /* GameLogicTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

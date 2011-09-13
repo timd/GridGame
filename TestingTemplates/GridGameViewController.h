@@ -15,6 +15,10 @@
     int lives;
     int rows;
     int columns;
+    int turns;
+    
+    NSMutableArray *userAnswers;
+    NSMutableArray *appAnswers;
     
 }
 
@@ -32,6 +36,9 @@
 
 
 -(IBAction)didTapGridButton:(id)sender;
+-(IBAction)submitButtonTapped:(id)sender;
 
+-(void)setupGame;
+-(BOOL)checkIfGameWonWithAnswers:(NSArray *)answersArray andPlacings:(NSArray *)placingsArray;
 
 @end

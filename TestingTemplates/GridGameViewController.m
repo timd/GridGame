@@ -22,6 +22,128 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+
+
+#pragma mark - View lifecycle
+
+
+// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+
+    // Setup initial values
+    points = 0;
+    wins = 0;
+    lives = 2;
+    columns = 3;
+    rows = 3;
+    turns = 1;
+    
+    // Set up answers array
+    userAnswers = [[NSMutableArray alloc] init];
+    appAnswers = [[NSMutableArray alloc] init];
+    
+    [self setupGame];
+}
+
+-(void)setupGame {    
+    
+    // Create and show new grid
+    NSArray *xyPositions = [self createArrayOfPositionsForRows:rows andColumns:columns];
+    NSArray *tagsArray = [self generateArrayOfFilledBlocksForRows:rows andColumns:columns];
+    NSLog(@"tagsArray = %@", tagsArray);
+
+    // Create a blank grid
+    UIView *startingGrid = [self createGridWithRows:rows andColumns:columns];
+    UIView *buttonGrid = [self createGridWithRows:rows andColumns:columns];
+    
+    // Create the buttoned grid
+    UIView *beButtonedView = [self addButtonsToView:buttonGrid atPositions:xyPositions];
+    UIView *unButtonedView = [self addSubviewsToView:startingGrid atPositions:xyPositions];
+    
+    appAnswers = [[NSArray arrayWithObjects:[NSNumber numberWithInt:21],
+                         [NSNumber numberWithInt:32], nil] retain];
+    
+    UIView *blockedUpView = [self addBlocksFromArray:appAnswers ToGrid:unButtonedView];
+    
+    [self.view addSubview:beButtonedView];
+    [beButtonedView setUserInteractionEnabled:NO];
+    
+    [self.view addSubview:blockedUpView];
+
+    [UIView animateWithDuration:1.0 delay:5.0 options:UIViewAnimationCurveLinear animations:^{
+        [blockedUpView setAlpha:0];
+    }
+                     completion:^(BOOL finished) {
+                         [beButtonedView setUserInteractionEnabled:YES];
+                         UIButton *submitButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+                         [submitButton setFrame:CGRectMake(123, 403, 75, 40)];
+                         [submitButton addTarget:self action:@selector(submitButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+                         [self.view addSubview:submitButton];
+                     }];
+    
+     //    [startingGrid setAlpha:0];
+    
+}
+
+#pragma mark -
+#pragma mark User interaction methods
+
+-(IBAction)didTapGridButton:(id)sender {
+    
+    UIButton *tappedButton = (UIButton *)sender;
+    if ([tappedButton backgroundImageForState:UIControlStateNormal] == [UIImage imageNamed:@"whiteButtonBackground"]) {
+        [tappedButton setBackgroundImage:[UIImage imageNamed:@"blueButtonBackground"] forState:UIControlStateNormal];
+    } else {
+        [tappedButton setBackgroundImage:[UIImage imageNamed:@"whiteButtonBackground"] forState:UIControlStateNormal];
+    }
+    
+    NSNumber *tappedTag = [NSNumber numberWithInt:tappedButton.tag];
+
+    if ( [userAnswers containsObject:tappedTag] ) {
+        [userAnswers removeObject:tappedTag];
+    } else {
+        [userAnswers addObject:tappedTag];
+    }
+    
+    NSLog(@"Button %d tapped", tappedButton.tag);
+    
+}
+
+- (IBAction)submitButtonTapped:(id)sender {
+    
+    NSLog(@"submit button tapped");
+    NSLog(@"userAnswers = %@", userAnswers);
+    
+    if (![self checkIfGameWonWithAnswers:userAnswers andPlacings:appAnswers]) {
+        // game was lost
+    } else {
+        // game was lost
+    }
+}
+
+#pragma mark -
+#pragma mark Game methods
+
+-(BOOL)checkIfGameWonWithAnswers:(NSArray *)answersArray andPlacings:(NSArray *)placingsArray {
+    
+    // Sort the two arrays
+    NSArray *sortedAppArray = [answersArray sortedArrayUsingSelector:@selector(compare:)];
+    NSArray *sortedUserArray = [placingsArray sortedArrayUsingSelector:@selector(compare:)];
+    
+    if ([sortedUserArray isEqualToArray:sortedAppArray]) {
+        return YES;
+    } else {
+        return NO;
+    }
+    
+}
+
 #pragma mark -
 #pragma mark Grid methods
 
@@ -46,62 +168,9 @@
 }
 
 
-#pragma mark - View lifecycle
+#pragma mark -
+#pragma mark Board creation methods
 
-
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-}
-
--(void)viewDidAppear:(BOOL)animated {
-
-    // Setup initial values
-    points = 0;
-    wins = 0;
-    lives = 2;
-    columns = 4;
-    rows = 5;
-    
-    // Create and show new grid
-    NSArray *xyPositions = [self createArrayOfPositionsForRows:rows andColumns:columns];
-
-
-    NSArray *tagsArray = [self generateArrayOfFilledBlocksForRows:rows andColumns:columns];
-    NSLog(@"tagsArray = %@", tagsArray);
-
-    // Create a blank grid
-    UIView *startingGrid = [self createGridWithRows:rows andColumns:columns];
-    UIView *buttonGrid = [self createGridWithRows:rows andColumns:columns];
-    
-    // Create the buttoned grid
-    UIView *beButtonedView = [self addButtonsToView:buttonGrid atPositions:xyPositions];
-    UIView *unButtonedView = [self addSubviewsToView:startingGrid atPositions:xyPositions];
-    
-    NSArray *theArray = [NSArray arrayWithObjects:[NSNumber numberWithInt:21],
-                         [NSNumber numberWithInt:32], nil];
-    
-    UIView *blockedUpView = [self addBlocksFromArray:theArray ToGrid:unButtonedView];
-    
-    [self.view addSubview:beButtonedView];
-    [beButtonedView setUserInteractionEnabled:NO];
-    
-    [self.view addSubview:blockedUpView];
-
-    [UIView animateWithDuration:1.0 delay:5.0 options:UIViewAnimationCurveLinear animations:^{
-        [blockedUpView setAlpha:0];
-    }
-                     completion:^(BOOL finished) {
-                         [beButtonedView setUserInteractionEnabled:YES];
-                     }];
-    
-     //    [startingGrid setAlpha:0];
-    
-
-    
-}
 
 -(NSArray *)generateArrayOfFilledBlocksForRows:(int)bRows andColumns:(int)bColumns {
 
@@ -119,7 +188,7 @@
         }
     }
     
-    NSArray *returnArray = [[NSArray arrayWithArray:tagsArray] autorelease];
+    NSArray *returnArray = [NSArray arrayWithArray:tagsArray];
     
     return returnArray;
     
@@ -145,19 +214,6 @@
 }
 
 
--(IBAction)didTapGridButton:(id)sender {
-    
-    UIButton *tappedButton = (UIButton *)sender;
-    if ([tappedButton backgroundImageForState:UIControlStateNormal] == [UIImage imageNamed:@"whiteButtonBackground"]) {
-        [tappedButton setBackgroundImage:[UIImage imageNamed:@"blueButtonBackground"] forState:UIControlStateNormal];
-    } else {
-        [tappedButton setBackgroundImage:[UIImage imageNamed:@"whiteButtonBackground"] forState:UIControlStateNormal];
-    }
-    
-    NSLog(@"Button %d tapped", tappedButton.tag);
-    
-}
-
 -(UIView *)addButtonsToView:(UIView *)theView atPositions:(NSArray *)positionsArray {
     
     for (NSArray *coords in positionsArray) {
@@ -167,16 +223,16 @@
         float yCoord = [[coords objectAtIndex:1] floatValue];
         NSString *tagString = [coords objectAtIndex:2];        
 
-        int intXCoord = (int)xCoord;
-        int intYCoord = (int)yCoord;
+        //int intXCoord = (int)xCoord;
+        //int intYCoord = (int)yCoord;
         
         int tagInt = [tagString intValue];
         
-        NSLog(@"Floats: X/Y = %f/%f", xCoord, yCoord);
-        NSLog(@"Ints: X/Y = %d/%d", intXCoord, intYCoord);
-        NSLog(@"tagString = %@", tagString);
-        NSLog(@"tagInt = %d", tagInt);
-        NSLog(@"=========================");
+        //NSLog(@"Floats: X/Y = %f/%f", xCoord, yCoord);
+        //NSLog(@"Ints: X/Y = %d/%d", intXCoord, intYCoord);
+        //NSLog(@"tagString = %@", tagString);
+        //NSLog(@"tagInt = %d", tagInt);
+        //NSLog(@"=========================");
         
         // Create a button at the x/y coordinates
         //        UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -287,7 +343,7 @@
     
     UIImage *backgroundImage = [self backgroundImageForRows:numberOfRows andColumns:numberOfColumns];
     
-    UIView *gridView = [[[UIView alloc] initWithFrame:CGRectMake([self calculateXoffsetForGridWithColumns:numberOfColumns], 60, gridWidth, gridHeight)] autorelease];
+    UIView *gridView = [[UIView alloc] initWithFrame:CGRectMake([self calculateXoffsetForGridWithColumns:numberOfColumns], 60, gridWidth, gridHeight)];
     UIImageView *gridImageView = [[UIImageView alloc] initWithImage:backgroundImage];
     
     [gridView addSubview:gridImageView];
@@ -295,11 +351,20 @@
     return gridView;
 }
 
+#pragma mark -
+#pragma mark Shutdown methods
+
 - (void)viewDidUnload
 {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    [userAnswers release];
+    userAnswers = nil;
+    
+    [appAnswers release];
+    appAnswers = nil;
+    
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -308,4 +373,8 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (void)dealloc {
+
+    [super dealloc];
+}
 @end

@@ -6,8 +6,8 @@ http://adoptioncurve.net/foodhospital
 ===================================================
 
 ### Version         :   0.1
-### Branch          :   master
-### Branched from   :   n/a
+### Branch          :   develop
+### Branched from   :   master
 ### Merged with     :  	n/a
 ### Date            :   13/09/2011
 

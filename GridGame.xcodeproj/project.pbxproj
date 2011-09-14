@@ -510,10 +510,14 @@
 		2221C88A141F66E4005E9538 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Tim Duckett (KM4NF2P463)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Tim Duckett (KM4NF2P463)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TestingTemplates/GridGame-Prefix.pch";
 				INFOPLIST_FILE = "TestingTemplates/GridGame-Info.plist";
 				PRODUCT_NAME = GridGame;
+				PROVISIONING_PROFILE = "3A079F07-7974-4FCA-A437-F221897680B5";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3A079F07-7974-4FCA-A437-F221897680B5";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -521,10 +525,14 @@
 		2221C88B141F66E4005E9538 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Tim Duckett (KM4NF2P463)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Tim Duckett (KM4NF2P463)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TestingTemplates/GridGame-Prefix.pch";
 				INFOPLIST_FILE = "TestingTemplates/GridGame-Info.plist";
 				PRODUCT_NAME = GridGame;
+				PROVISIONING_PROFILE = "3A079F07-7974-4FCA-A437-F221897680B5";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3A079F07-7974-4FCA-A437-F221897680B5";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -604,8 +604,8 @@
         backgroundImage = [UIImage imageNamed:@"4x6"];        
     }
 
-    return [backgroundImage autorelease];
-
+    //return [backgroundImage autorelease];
+    return backgroundImage;
 }
 
 - (UIView *)createGridWithRows:(int)numberOfRows andColumns:(int)numberOfColumns {

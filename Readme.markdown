@@ -6,9 +6,9 @@ http://adoptioncurve.net/foodhospital
 ===================================================
 
 ### Version         :   0.1
-### Branch          :   develop
+### Branch          :   master
 ### Branched from   :   n/a
-### Merged with     :  	features/game-grids
+### Merged with     :  	develop
 ### Date            :   13/09/2011
 
 ===================================================
@@ -25,6 +25,7 @@ http://adoptioncurve.net/foodhospital
 - wrote tests for win/lose logic
 - added programatic placement of blocks in game
 - merged in feature/game-grids
+- merged in develop
 
 ### In progress:
 

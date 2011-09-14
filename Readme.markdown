@@ -6,9 +6,9 @@ http://adoptioncurve.net/foodhospital
 ===================================================
 
 ### Version         :   0.1
-### Branch          :   master
+### Branch          :   develop
 ### Branched from   :   n/a
-### Merged with     :  	n/a
+### Merged with     :  	features/game-grids
 ### Date            :   13/09/2011
 
 ===================================================
@@ -20,10 +20,17 @@ http://adoptioncurve.net/foodhospital
 
 ### Completed:
 - initial commit to project
+- basic game structure
+- added win/lose logic to submitButtonTapped
+- wrote tests for win/lose logic
+- added programatic placement of blocks in game
+- merged in feature/game-grids
 
 ### In progress:
 
 ### Todo:
+- add ending handover to the main app
+- tidy up board screen
 
 ### Icebox:
 

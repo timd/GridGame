@@ -21,12 +21,15 @@ http://adoptioncurve.net/foodhospital
 ### Completed:
 - initial commit to project
 - basic game structure
+- added win/lose logic to submitButtonTapped
+- wrote tests for win/lose logic
 
 ### In progress:
-- adding win/lose logic to submitButtonTapped
-- writing tests for win/lose logic
 
 ### Todo:
+- add programmatic placement of blocks to game
+- add ending handover to the main app
+- tidy up board screen
 
 ### Icebox:
 

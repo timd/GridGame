@@ -40,9 +40,9 @@
     GHAssertEquals(backgroundView.size.height, actualImage.size.height, @"height of image should be %f, is %f", actualImage.size.height, backgroundView.size.height);
     GHAssertEquals(backgroundView.size.width, actualImage.size.width, @"width of image should be %f, is %f", actualImage.size.width, backgroundView.size.width);
 
-    cols = 3;
-    rows = 4;
-    actualImage = [UIImage imageNamed:@"3x4"];
+    cols = 4;
+    rows = 3;
+    actualImage = [UIImage imageNamed:@"4x3"];
     
     backgroundView = [gridVC backgroundImageForRows:rows andColumns:cols];
     GHAssertEquals(backgroundView.size.height, actualImage.size.height, @"height of image should be %f, is %f", actualImage.size.height, backgroundView.size.height);

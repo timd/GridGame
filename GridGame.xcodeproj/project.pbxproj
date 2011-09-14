@@ -31,10 +31,6 @@
 		2221C8D2141FACD7005E9538 /* 3x3.png in Resources */ = {isa = PBXBuildFile; fileRef = 2221C8C7141FACD6005E9538 /* 3x3.png */; };
 		2221C8D3141FACD7005E9538 /* 3x3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2221C8C8141FACD6005E9538 /* 3x3@2x.png */; };
 		2221C8D4141FACD7005E9538 /* 3x3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2221C8C8141FACD6005E9538 /* 3x3@2x.png */; };
-		2221C8D5141FACD7005E9538 /* 3x4.png in Resources */ = {isa = PBXBuildFile; fileRef = 2221C8C9141FACD6005E9538 /* 3x4.png */; };
-		2221C8D6141FACD7005E9538 /* 3x4.png in Resources */ = {isa = PBXBuildFile; fileRef = 2221C8C9141FACD6005E9538 /* 3x4.png */; };
-		2221C8D7141FACD7005E9538 /* 3x4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2221C8CA141FACD6005E9538 /* 3x4@2x.png */; };
-		2221C8D8141FACD7005E9538 /* 3x4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2221C8CA141FACD6005E9538 /* 3x4@2x.png */; };
 		2221C8D9141FACD7005E9538 /* 4x4.png in Resources */ = {isa = PBXBuildFile; fileRef = 2221C8CB141FACD6005E9538 /* 4x4.png */; };
 		2221C8DA141FACD7005E9538 /* 4x4.png in Resources */ = {isa = PBXBuildFile; fileRef = 2221C8CB141FACD6005E9538 /* 4x4.png */; };
 		2221C8DB141FACD7005E9538 /* 4x4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2221C8CC141FACD6005E9538 /* 4x4@2x.png */; };
@@ -58,6 +54,11 @@
 		2221C8F5141FD417005E9538 /* blueButtonBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2221C8F2141FD417005E9538 /* blueButtonBackground@2x.png */; };
 		2221C8F6141FD417005E9538 /* blueButtonBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2221C8F2141FD417005E9538 /* blueButtonBackground@2x.png */; };
 		2221C8F914200520005E9538 /* GameLogicTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2221C8F814200520005E9538 /* GameLogicTests.m */; };
+		22B7DA141420CEA60043628D /* GridGameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2221C884141F66E4005E9538 /* GridGameViewController.xib */; };
+		22B7DA181420D7720043628D /* 4x3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 22B7DA161420D7720043628D /* 4x3@2x.png */; };
+		22B7DA191420D7720043628D /* 4x3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 22B7DA161420D7720043628D /* 4x3@2x.png */; };
+		22B7DA1A1420D7720043628D /* 4x3.png in Resources */ = {isa = PBXBuildFile; fileRef = 22B7DA171420D7720043628D /* 4x3.png */; };
+		22B7DA1B1420D7720043628D /* 4x3.png in Resources */ = {isa = PBXBuildFile; fileRef = 22B7DA171420D7720043628D /* 4x3.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -101,8 +102,6 @@
 		2221C8C4141F84C9005E9538 /* GridView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GridView.xib; sourceTree = "<group>"; };
 		2221C8C7141FACD6005E9538 /* 3x3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3x3.png; sourceTree = "<group>"; };
 		2221C8C8141FACD6005E9538 /* 3x3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "3x3@2x.png"; sourceTree = "<group>"; };
-		2221C8C9141FACD6005E9538 /* 3x4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3x4.png; sourceTree = "<group>"; };
-		2221C8CA141FACD6005E9538 /* 3x4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "3x4@2x.png"; sourceTree = "<group>"; };
 		2221C8CB141FACD6005E9538 /* 4x4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4x4.png; sourceTree = "<group>"; };
 		2221C8CC141FACD6005E9538 /* 4x4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "4x4@2x.png"; sourceTree = "<group>"; };
 		2221C8CD141FACD6005E9538 /* 4x5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4x5.png; sourceTree = "<group>"; };
@@ -115,6 +114,8 @@
 		2221C8F1141FD417005E9538 /* blueButtonBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueButtonBackground.png; sourceTree = "<group>"; };
 		2221C8F2141FD417005E9538 /* blueButtonBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blueButtonBackground@2x.png"; sourceTree = "<group>"; };
 		2221C8F814200520005E9538 /* GameLogicTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameLogicTests.m; sourceTree = "<group>"; };
+		22B7DA161420D7720043628D /* 4x3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "4x3@2x.png"; sourceTree = "<group>"; };
+		22B7DA171420D7720043628D /* 4x3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4x3.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -273,10 +274,10 @@
 		2221C8F0141FD327005E9538 /* Backgrounds */ = {
 			isa = PBXGroup;
 			children = (
+				22B7DA161420D7720043628D /* 4x3@2x.png */,
+				22B7DA171420D7720043628D /* 4x3.png */,
 				2221C8C7141FACD6005E9538 /* 3x3.png */,
 				2221C8C8141FACD6005E9538 /* 3x3@2x.png */,
-				2221C8C9141FACD6005E9538 /* 3x4.png */,
-				2221C8CA141FACD6005E9538 /* 3x4@2x.png */,
 				2221C8CB141FACD6005E9538 /* 4x4.png */,
 				2221C8CC141FACD6005E9538 /* 4x4@2x.png */,
 				2221C8CD141FACD6005E9538 /* 4x5.png */,
@@ -362,8 +363,6 @@
 				2221C8C5141F84C9005E9538 /* GridView.xib in Resources */,
 				2221C8D1141FACD7005E9538 /* 3x3.png in Resources */,
 				2221C8D3141FACD7005E9538 /* 3x3@2x.png in Resources */,
-				2221C8D5141FACD7005E9538 /* 3x4.png in Resources */,
-				2221C8D7141FACD7005E9538 /* 3x4@2x.png in Resources */,
 				2221C8D9141FACD7005E9538 /* 4x4.png in Resources */,
 				2221C8DB141FACD7005E9538 /* 4x4@2x.png in Resources */,
 				2221C8DD141FACD7005E9538 /* 4x5.png in Resources */,
@@ -374,6 +373,8 @@
 				2221C8EE141FD321005E9538 /* whiteButtonBackground.png in Resources */,
 				2221C8F3141FD417005E9538 /* blueButtonBackground.png in Resources */,
 				2221C8F5141FD417005E9538 /* blueButtonBackground@2x.png in Resources */,
+				22B7DA181420D7720043628D /* 4x3@2x.png in Resources */,
+				22B7DA1A1420D7720043628D /* 4x3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,8 +386,6 @@
 				2221C8C6141F84C9005E9538 /* GridView.xib in Resources */,
 				2221C8D2141FACD7005E9538 /* 3x3.png in Resources */,
 				2221C8D4141FACD7005E9538 /* 3x3@2x.png in Resources */,
-				2221C8D6141FACD7005E9538 /* 3x4.png in Resources */,
-				2221C8D8141FACD7005E9538 /* 3x4@2x.png in Resources */,
 				2221C8DA141FACD7005E9538 /* 4x4.png in Resources */,
 				2221C8DC141FACD7005E9538 /* 4x4@2x.png in Resources */,
 				2221C8DE141FACD7005E9538 /* 4x5.png in Resources */,
@@ -397,6 +396,9 @@
 				2221C8EF141FD321005E9538 /* whiteButtonBackground.png in Resources */,
 				2221C8F4141FD417005E9538 /* blueButtonBackground.png in Resources */,
 				2221C8F6141FD417005E9538 /* blueButtonBackground@2x.png in Resources */,
+				22B7DA141420CEA60043628D /* GridGameViewController.xib in Resources */,
+				22B7DA191420D7720043628D /* 4x3@2x.png in Resources */,
+				22B7DA1B1420D7720043628D /* 4x3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

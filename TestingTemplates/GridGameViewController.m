@@ -14,6 +14,19 @@
 
 @implementation GridGameViewController
 
+@synthesize points;
+@synthesize wins;
+@synthesize lives;
+@synthesize rows;
+@synthesize columns;
+@synthesize turn;
+@synthesize level;
+@synthesize scoreLabel;
+@synthesize turnLabel;
+@synthesize livesLabel;
+@synthesize levelLabel;
+@synthesize correctGuessesThisTurn;
+
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
@@ -32,83 +45,55 @@
 {
     [super viewDidLoad];
     
+    // Setup initial values
+    self.points = 0;
+    self.wins = 0;
+    self.lives = 2;
+    self.columns = 3;
+    self.rows = 3;
+    self.level = 1;
+    self.turn = 1;
+    
+    scoreLabel.text = [NSString stringWithFormat:@"%d", self.points];;
+    livesLabel.text = [NSString stringWithFormat:@"%d", self.lives];
+    turnLabel.text = [NSString stringWithFormat:@"%d", self.turn];
+    levelLabel.text = [NSString stringWithFormat:@"%d", self.level]; 
+    
+    // Set up answers array
+    userAnswers = [[NSMutableArray alloc] initWithObjects: nil];
+    appAnswers = [[NSMutableArray alloc] initWithObjects: nil];
+    
+    [self startRound];
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated {
 
-    // Setup initial values
-    points = 0;
-    wins = 0;
-    lives = 2;
-    columns = 3;
-    rows = 3;
-    turns = 1;
-    
-    // Set up answers array
-    userAnswers = [[NSMutableArray alloc] init];
-    appAnswers = [[NSMutableArray alloc] init];
-    
-    [self setupGame];
 }
 
--(void)setupGame {    
-    
-    // Create and show new grid
-    NSArray *xyPositions = [self createArrayOfPositionsForRows:rows andColumns:columns];
-    NSArray *tagsArray = [self generateArrayOfFilledBlocksForRows:rows andColumns:columns];
-    NSLog(@"tagsArray = %@", tagsArray);
-
-    // Create a blank grid
-    UIView *startingGrid = [self createGridWithRows:rows andColumns:columns];
-    UIView *buttonGrid = [self createGridWithRows:rows andColumns:columns];
-    
-    // Create the buttoned grid
-    UIView *beButtonedView = [self addButtonsToView:buttonGrid atPositions:xyPositions];
-    UIView *unButtonedView = [self addSubviewsToView:startingGrid atPositions:xyPositions];
-    
-    appAnswers = [[NSArray arrayWithObjects:[NSNumber numberWithInt:21],
-                         [NSNumber numberWithInt:32], nil] retain];
-    
-    UIView *blockedUpView = [self addBlocksFromArray:appAnswers ToGrid:unButtonedView];
-    
-    [self.view addSubview:beButtonedView];
-    [beButtonedView setUserInteractionEnabled:NO];
-    
-    [self.view addSubview:blockedUpView];
-
-    [UIView animateWithDuration:1.0 delay:5.0 options:UIViewAnimationCurveLinear animations:^{
-        [blockedUpView setAlpha:0];
-    }
-                     completion:^(BOOL finished) {
-                         [beButtonedView setUserInteractionEnabled:YES];
-                         UIButton *submitButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-                         [submitButton setFrame:CGRectMake(123, 403, 75, 40)];
-                         [submitButton addTarget:self action:@selector(submitButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-                         [self.view addSubview:submitButton];
-                     }];
-    
-     //    [startingGrid setAlpha:0];
-    
-}
 
 #pragma mark -
 #pragma mark User interaction methods
 
 -(IBAction)didTapGridButton:(id)sender {
-    
+
     UIButton *tappedButton = (UIButton *)sender;
-    if ([tappedButton backgroundImageForState:UIControlStateNormal] == [UIImage imageNamed:@"whiteButtonBackground"]) {
-        [tappedButton setBackgroundImage:[UIImage imageNamed:@"blueButtonBackground"] forState:UIControlStateNormal];
-    } else {
-        [tappedButton setBackgroundImage:[UIImage imageNamed:@"whiteButtonBackground"] forState:UIControlStateNormal];
-    }
-    
     NSNumber *tappedTag = [NSNumber numberWithInt:tappedButton.tag];
 
-    if ( [userAnswers containsObject:tappedTag] ) {
-        [userAnswers removeObject:tappedTag];
-    } else {
+    if ([tappedButton backgroundImageForState:UIControlStateNormal] == [UIImage imageNamed:@"whiteButtonBackground"]) {
+        // button isn't selected, so select it and add square to answers
+        [tappedButton setBackgroundImage:[UIImage imageNamed:@"blueButtonBackground"] forState:UIControlStateNormal];
+
         [userAnswers addObject:tappedTag];
+
+    } else {
+        // button IS selected, deselect and remove square from answers
+        [tappedButton setBackgroundImage:[UIImage imageNamed:@"whiteButtonBackground"] forState:UIControlStateNormal];
+
+        if ( [userAnswers containsObject:tappedTag] ) {
+            [userAnswers removeObject:tappedTag];
+        } 
+
     }
     
     NSLog(@"Button %d tapped", tappedButton.tag);
@@ -120,15 +105,82 @@
     NSLog(@"submit button tapped");
     NSLog(@"userAnswers = %@", userAnswers);
     
-    if (![self checkIfGameWonWithAnswers:userAnswers andPlacings:appAnswers]) {
-        // game was lost
-    } else {
-        // game was lost
-    }
+    UIButton *button = (UIButton *)sender;
+    [button setHidden:YES];
+    
+    // Did user win
+    [self checkIfGameWonWithAnswers:userAnswers andPlacings:appAnswers];
+    
+    [self shouldLevelIncrease];
+    
+    scoreLabel.text = [NSString stringWithFormat:@"%d", self.points];;
+    livesLabel.text = [NSString stringWithFormat:@"%d", self.lives];
+    turnLabel.text = [NSString stringWithFormat:@"%d", self.turn];
+    levelLabel.text = [NSString stringWithFormat:@"%d", self.level]; 
+
 }
 
 #pragma mark -
 #pragma mark Game methods
+
+-(void)startRound {    
+    
+    scoreLabel.text = [NSString stringWithFormat:@"%d", self.points];;
+    livesLabel.text = [NSString stringWithFormat:@"%d", self.lives];
+    turnLabel.text = [NSString stringWithFormat:@"%d", self.turn];
+    levelLabel.text = [NSString stringWithFormat:@"%d", self.level]; 
+    
+    // Create and show new grid
+    NSArray *xyPositions = [self createArrayOfPositionsForRows:self.rows andColumns:self.columns];
+    NSArray *tagsArray = [self generateArrayOfFilledBlocksForRows:self.rows andColumns:self.columns];
+    NSLog(@"tagsArray = %@", tagsArray);
+    
+    // Create a blank grid
+    UIView *startingGrid = [self createGridWithRows:self.rows andColumns:self.columns];
+    UIView *buttonGrid = [self createGridWithRows:self.rows andColumns:self.columns];
+    
+    // Create the buttoned grid
+    UIView *beButtonedView = [self addButtonsToView:buttonGrid atPositions:xyPositions];
+    UIView *unButtonedView = [self addSubviewsToView:startingGrid atPositions:xyPositions];
+    
+    
+    /****************************
+    *
+    * Set up this turn's answers
+    *
+    * TODO: Create "live" grid"
+    *
+    ****************************/
+    
+    appAnswers = [[NSArray arrayWithObjects:[NSNumber numberWithInt:11], nil] retain];
+    
+    // Clear out the user answers array
+    [userAnswers removeAllObjects];
+    
+    UIView *blockedUpView = [self addBlocksFromArray:appAnswers ToGrid:unButtonedView];
+    
+    [self.view addSubview:beButtonedView];
+    [beButtonedView setUserInteractionEnabled:NO];
+    
+    [self.view addSubview:blockedUpView];
+    
+    UIButton *submitButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [submitButton setFrame:CGRectMake(123, 403, 75, 40)];
+    [submitButton setTitle:@"Guess!" forState:UIControlStateNormal];
+    [submitButton addTarget:self action:@selector(submitButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    //[submitButton setHidden:YES];
+    [self.view addSubview:submitButton];
+    
+    [UIView animateWithDuration:0.5 delay:2.0 options:UIViewAnimationCurveLinear animations:^{
+        [blockedUpView setAlpha:0];
+    }
+                     completion:^(BOOL finished) {
+                         [beButtonedView setUserInteractionEnabled:YES];
+                         [submitButton setHidden:NO];
+                     }];
+    
+}
+
 
 -(BOOL)checkIfGameWonWithAnswers:(NSArray *)answersArray andPlacings:(NSArray *)placingsArray {
     
@@ -137,10 +189,103 @@
     NSArray *sortedUserArray = [placingsArray sortedArrayUsingSelector:@selector(compare:)];
     
     if ([sortedUserArray isEqualToArray:sortedAppArray]) {
+        // Game has been won
+        
+        self.points++;
+        self.turn++;
+        self.correctGuessesThisTurn++;
+        [self shouldLevelIncrease];
+        
+        return YES;
+        
+    } else {
+        self.turn++;
+        self.lives--;
+        [self shouldLevelIncrease];
+        return NO;
+        
+    }
+    
+}
+
+-(void)shouldLevelIncrease {
+    
+    if (self.correctGuessesThisTurn == 2) {
+        self.turn = 1;
+        self.level++;
+        self.correctGuessesThisTurn = 0;
+        [self increaseBoardSize];
+    }
+    
+    BOOL shouldStartNewRound = [self shouldNewRoundStart];
+    
+    if (shouldStartNewRound) {
+        [self startRound];
+    } else  {
+        
+        BOOL wasGameLost = [self wasGameLost];
+        
+        if (wasGameLost) {
+            [self endGameAsLost];
+        } else {
+            [self endGameAsWon];
+        }
+            
+    }
+    
+}
+
+-(BOOL)shouldNewRoundStart {
+
+    if ( self.lives != 0 && self.level !=5 && self.correctGuessesThisTurn != 2 ) {
         return YES;
     } else {
         return NO;
     }
+    
+}
+
+-(BOOL)wasGameLost {
+    
+    if (self.lives == 0) {
+        return YES;
+    } else {
+        return NO;
+    }
+    
+}
+
+-(void)increaseBoardSize{
+    
+    if (self.columns == 3) {
+        self.columns++;
+    } else {
+        self.rows++;
+    }
+}
+
+-(void)endGameAsWon {
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Congratulations!" 
+                                                    message:@"You won the game" 
+                                                   delegate:nil 
+                                          cancelButtonTitle:@"OK" 
+                                          otherButtonTitles: nil];
+    [alert show];
+    [alert release];
+    
+}
+
+-(void)endGameAsLost {
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Commiserations" 
+                                                    message:@"You lost the game" 
+                                                   delegate:nil 
+                                          cancelButtonTitle:@"OK" 
+                                          otherButtonTitles: nil];
+    [alert show];
+    [alert release];
+
     
 }
 
@@ -235,12 +380,11 @@
         //NSLog(@"=========================");
         
         // Create a button at the x/y coordinates
-        //        UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button setBackgroundImage:[UIImage imageNamed:@"whiteButtonBackground"] forState:UIControlStateNormal];
         [button setFrame:CGRectMake(xCoord, yCoord, 60, 60)];
         [button setTag:tagInt];
-        [button setTitle:tagString forState:UIControlStateNormal];
+        // [button setTitle:tagString forState:UIControlStateNormal];
         [button addTarget:self action:@selector(didTapGridButton:) forControlEvents:UIControlEventTouchUpInside];
         
         // add the button to the gridView
@@ -273,7 +417,6 @@
         NSLog(@"=========================");
         
         // Create a button at the x/y coordinates
-        //        UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         UIView *subView = [[UIView alloc] initWithFrame:CGRectMake(xCoord, yCoord, 60, 60)];
         [subView setTag:tagInt];
         
@@ -315,13 +458,13 @@
 
 -(UIImage *)backgroundImageForRows:(int)numberOfRows andColumns:(int)numberOfColumns {
 
-    UIImage *backgroundImage;
+    UIImage *backgroundImage = [[UIImage alloc] init];
     
     //Select the background image
     if (numberOfColumns == 3 && numberOfRows == 3) {
         backgroundImage = [UIImage imageNamed:@"3x3"];
-    } else if ( numberOfColumns == 3 && numberOfRows == 4 ) {
-        backgroundImage = [UIImage imageNamed:@"3x4"];        
+    } else if ( numberOfColumns == 4 && numberOfRows == 3 ) {
+        backgroundImage = [UIImage imageNamed:@"4x3"];        
     } else if ( numberOfColumns == 4 && numberOfRows == 4 ) {
         backgroundImage = [UIImage imageNamed:@"4x4"];        
     } else if ( numberOfColumns == 4 && numberOfRows == 5 ) {
@@ -330,7 +473,7 @@
         backgroundImage = [UIImage imageNamed:@"4x6"];        
     }
 
-    return backgroundImage;
+    return [backgroundImage autorelease];
 
 }
 
@@ -338,8 +481,8 @@
     
     // Create and show new grid
     // Size is a function of the number of rows
-    int gridWidth = [self calculateWidthOfGridFor:numberOfRows];
-    int gridHeight = [self calculateHeightOfGridFor:numberOfColumns] + 60;
+    int gridWidth = [self calculateWidthOfGridFor:numberOfColumns];
+    int gridHeight = [self calculateHeightOfGridFor:numberOfRows] + 60;
     
     UIImage *backgroundImage = [self backgroundImageForRows:numberOfRows andColumns:numberOfColumns];
     
@@ -348,7 +491,7 @@
     
     [gridView addSubview:gridImageView];
     
-    return gridView;
+    return [gridView autorelease];
 }
 
 #pragma mark -
@@ -356,6 +499,10 @@
 
 - (void)viewDidUnload
 {
+    [self setScoreLabel:nil];
+    [self setTurnLabel:nil];
+    [self setLivesLabel:nil];
+    [self setLevelLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -375,6 +522,10 @@
 
 - (void)dealloc {
 
+    [scoreLabel release];
+    [turnLabel release];
+    [livesLabel release];
+    [levelLabel release];
     [super dealloc];
 }
 @end

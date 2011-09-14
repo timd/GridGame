@@ -10,17 +10,27 @@
 
 @interface GridGameViewController : UIViewController {
     
-    int points;
-    int wins;
-    int lives;
-    int rows;
-    int columns;
-    int turns;
-    
     NSMutableArray *userAnswers;
     NSMutableArray *appAnswers;
     
+    UILabel *scoreLabel;
+    UILabel *turnLabel;
+    UILabel *livesLabel;
+    UILabel *levelLabel;
 }
+
+@property (nonatomic) int points;
+@property (nonatomic) int wins;
+@property (nonatomic) int lives;
+@property (nonatomic) int rows;
+@property (nonatomic) int columns;
+@property (nonatomic) int turn;
+@property (nonatomic) int level;
+@property (nonatomic) int correctGuessesThisTurn;
+@property (nonatomic, retain) IBOutlet UILabel *scoreLabel;
+@property (nonatomic, retain) IBOutlet UILabel *turnLabel;
+@property (nonatomic, retain) IBOutlet UILabel *livesLabel;
+@property (nonatomic, retain) IBOutlet UILabel *levelLabel;
 
 - (UIView *)createGridWithRows:(int)numberOfRows andColumns:(int)numberOfColumns;
 - (UIImage *)backgroundImageForRows:(int)numberOfRows andColumns:(int)numberOfColumns;
@@ -38,7 +48,14 @@
 -(IBAction)didTapGridButton:(id)sender;
 -(IBAction)submitButtonTapped:(id)sender;
 
--(void)setupGame;
+-(void)startRound;
 -(BOOL)checkIfGameWonWithAnswers:(NSArray *)answersArray andPlacings:(NSArray *)placingsArray;
+-(void)shouldLevelIncrease;
+-(BOOL)shouldNewRoundStart;
+-(BOOL)wasGameLost;
+-(void)increaseBoardSize;
+-(void)endGameAsWon;
+-(void)endGameAsLost;
+
 
 @end

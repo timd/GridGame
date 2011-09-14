@@ -1,4 +1,4 @@
-//
+    //
 //  TestingTemplatesViewController.m
 //  TestingTemplates
 //
@@ -60,8 +60,7 @@
     levelLabel.text = [NSString stringWithFormat:@"%d", self.level]; 
     
     // Set up answers array
-    userAnswers = [[NSMutableArray alloc] initWithObjects: nil];
-    appAnswers = [[NSMutableArray alloc] initWithObjects: nil];
+    userAnswers = [[NSMutableArray alloc] init];
     
     [self startRound];
     
@@ -130,8 +129,14 @@
     turnLabel.text = [NSString stringWithFormat:@"%d", self.turn];
     levelLabel.text = [NSString stringWithFormat:@"%d", self.level]; 
     
+    //    appAnswers = [[NSArray arrayWithObjects:[NSNumber numberWithInt:11], nil] retain];
+    //    appAnswers = [[NSArray arrayWithArray:[self generateBlockPlacementArrayForLevelWithColumns:self.columns andRows:self.rows]] retain];
+    
+    xyPositions = [self createArrayOfPositionsForRows:self.rows andColumns:self.columns];
+    appAnswers = [[self generateRandomBlockPlacements] retain];
+    
     // Create and show new grid
-    NSArray *xyPositions = [self createArrayOfPositionsForRows:self.rows andColumns:self.columns];
+    
     NSArray *tagsArray = [self generateArrayOfFilledBlocksForRows:self.rows andColumns:self.columns];
     NSLog(@"tagsArray = %@", tagsArray);
     
@@ -152,7 +157,7 @@
     *
     ****************************/
     
-    appAnswers = [[NSArray arrayWithObjects:[NSNumber numberWithInt:11], nil] retain];
+    
     
     // Clear out the user answers array
     [userAnswers removeAllObjects];
@@ -168,7 +173,7 @@
     [submitButton setFrame:CGRectMake(123, 403, 75, 40)];
     [submitButton setTitle:@"Guess!" forState:UIControlStateNormal];
     [submitButton addTarget:self action:@selector(submitButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-    //[submitButton setHidden:YES];
+    [submitButton setHidden:YES];
     [self.view addSubview:submitButton];
     
     [UIView animateWithDuration:0.5 delay:2.0 options:UIViewAnimationCurveLinear animations:^{
@@ -182,29 +187,58 @@
 }
 
 
--(BOOL)checkIfGameWonWithAnswers:(NSArray *)answersArray andPlacings:(NSArray *)placingsArray {
+-(BOOL)checkIfGameWonWithAnswers:(NSMutableArray *)answersArray andPlacings:(NSArray *)placingsArray {
+    
+    // Check if there are the same number of elements in each
+    if ([answersArray count] != [placingsArray count]) {
+
+        self.turn++;
+        self.lives--;
+        [self shouldLevelIncrease];
+        
+        return NO;
+    }
+    
     
     // Sort the two arrays
-    NSArray *sortedAppArray = [answersArray sortedArrayUsingSelector:@selector(compare:)];
-    NSArray *sortedUserArray = [placingsArray sortedArrayUsingSelector:@selector(compare:)];
+    NSArray *sortedAppArray = [NSArray arrayWithArray:[answersArray sortedArrayUsingSelector:@selector(compare:)]];
+    NSArray *sortedUserArray = [NSArray arrayWithArray:[placingsArray sortedArrayUsingSelector:@selector(compare:)]];
+
+    for (int i = 0; i < [sortedUserArray count]; i++) {
     
-    if ([sortedUserArray isEqualToArray:sortedAppArray]) {
-        // Game has been won
+        int answerOne = [[sortedAppArray objectAtIndex:i] intValue];
+        int placerOne = [[sortedUserArray objectAtIndex:i] intValue];
+    
+        NSLog(@"A:%d / P:%d", answerOne, placerOne);
+    
+        if (answerOne != placerOne) {
+
+            // Dissimilar answer. It's incorrect
+            // so game is lost
+
+            self.turn++;
+            self.lives--;
+            [self shouldLevelIncrease];
+            
+            return NO;
+            
+        }
+        
+    }
+    
+    // Has got to the end of all the elements in both arrays, therefore
+    // the answer must be correct.  Game has been won.
+    
         
         self.points++;
         self.turn++;
         self.correctGuessesThisTurn++;
         [self shouldLevelIncrease];
         
+        //        [sortedAppArray release];
+        //        [sortedUserArray release];
+        
         return YES;
-        
-    } else {
-        self.turn++;
-        self.lives--;
-        [self shouldLevelIncrease];
-        return NO;
-        
-    }
     
 }
 
@@ -220,6 +254,10 @@
     BOOL shouldStartNewRound = [self shouldNewRoundStart];
     
     if (shouldStartNewRound) {
+        
+        // release the app answers
+        //        [appAnswers release];
+        
         [self startRound];
     } else  {
         
@@ -315,6 +353,99 @@
 
 #pragma mark -
 #pragma mark Board creation methods
+
+-(NSArray *)generateRandomBlockPlacements {
+    
+    // Copy xypositions into a mutable array
+    NSMutableArray *mutableXY = [NSMutableArray arrayWithArray:xyPositions];
+    NSMutableArray *randomPlacements = [[NSMutableArray alloc] init];
+    
+    for (int i = 0; i < (self.level + 1); i++) {
+        
+        int randomIndex = (arc4random() % [mutableXY count]);
+       
+        NSArray *chosenElement = [mutableXY objectAtIndex:randomIndex];
+        
+        NSNumber *tag = [chosenElement objectAtIndex:2];
+        
+        NSLog(@"Chosen tag = %@", tag);
+        
+        [randomPlacements addObject:tag];
+        
+        [mutableXY removeObjectAtIndex:randomIndex];
+        
+    }
+    
+    return [NSArray arrayWithArray:randomPlacements];
+}
+
+-(NSArray *)generateBlockPlacementArrayForLevelWithColumns:(int)columnCount andRows:(int)rowCount {
+    
+    NSMutableArray *blockPlacementArray = [[NSMutableArray alloc] initWithObjects: nil];
+    
+    NSMutableArray *colSeeds = [[NSMutableArray alloc] init];
+    NSMutableArray *rowSeeds = [[NSMutableArray alloc] init];
+    
+    NSMutableArray *colArray = [[NSMutableArray alloc] init];
+    NSMutableArray *rowArray = [[NSMutableArray alloc] init];
+    
+    // Seed colArray
+    for (int i=1; i <= columnCount; i++) {
+        [colSeeds addObject:[NSNumber numberWithInt:i]];
+    }
+
+    // Seed rowArray
+    for (int i=1; i <= columnCount; i++) {
+        [rowSeeds addObject:[NSNumber numberWithInt:i]];
+    }
+
+    // Grab random element from colArray
+    for (int i=0; i <= [colSeeds count] - 1; i++) {
+        
+        int indexToUse = arc4random() % ([colSeeds count] - 1);
+        
+        [colArray addObject:[colSeeds objectAtIndex:indexToUse]];
+        
+        [colSeeds removeObjectAtIndex:indexToUse];
+        
+    }    
+
+    // Grab random element from colArray
+    for (int i=0; i <= ([rowSeeds count] - 1); i++) {
+        
+        int indexToUse = arc4random() % ([rowSeeds count] - 1);
+        
+        [rowArray addObject:[rowSeeds objectAtIndex:indexToUse]];
+        
+        [rowSeeds removeObjectAtIndex:indexToUse];
+        
+    }    
+    
+    NSLog(@"colArray = %@", colArray);
+    NSLog(@"rowArray = %@", rowArray);
+    
+    for (int i=0; i < [colArray count]; i++) {
+        
+        int rowRef = [[rowArray objectAtIndex:i] intValue];
+        int colRef = [[rowArray objectAtIndex:i] intValue] * 10;
+        
+        int coord = colRef + rowRef;
+        NSLog(@"coord = %d", coord);
+        
+        [blockPlacementArray addObject:[NSNumber numberWithInt:coord]];
+        
+    }
+    
+    [colSeeds release];
+    [rowSeeds release];
+    [colArray release];
+    [rowArray release];
+    
+    NSLog(@"returnArray = %@", blockPlacementArray);
+    
+    return [NSArray arrayWithArray:blockPlacementArray];
+    
+}
 
 
 -(NSArray *)generateArrayOfFilledBlocksForRows:(int)bRows andColumns:(int)bColumns {
@@ -432,7 +563,7 @@
 
 -(NSArray *)createArrayOfPositionsForRows:(int)noOfRows andColumns:(int)noOfCols {
     
-    NSMutableArray *xyPositions = [[NSMutableArray alloc] init];
+    NSMutableArray *xyPositionsArray = [[NSMutableArray alloc] init];
     
     for (int r=0; r < noOfRows; r++) {
     
@@ -443,14 +574,14 @@
             NSString *tag = [NSString stringWithFormat:@"%d%d", r+1, c+1];
             
             NSArray *coord = [NSArray arrayWithObjects:xpos, ypos, tag, nil];
-            [xyPositions addObject:coord];
+            [xyPositionsArray addObject:coord];
             
         }
         
     }
     
-    NSArray *returnArray = [NSArray arrayWithArray:xyPositions];
-    [xyPositions release];
+    NSArray *returnArray = [NSArray arrayWithArray:xyPositionsArray];
+    [xyPositionsArray release];
     
     return returnArray;
 
@@ -491,7 +622,7 @@
     
     [gridView addSubview:gridImageView];
     
-    return [gridView autorelease];
+    return gridView;
 }
 
 #pragma mark -

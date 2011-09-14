@@ -11,7 +11,9 @@
 @interface GridGameViewController : UIViewController {
     
     NSMutableArray *userAnswers;
-    NSMutableArray *appAnswers;
+    NSArray *appAnswers;
+    
+    NSArray *xyPositions;
     
     UILabel *scoreLabel;
     UILabel *turnLabel;
@@ -43,13 +45,16 @@
 -(UIView *)addSubviewsToView:(UIView *)theView atPositions:(NSArray *)positionsArray;
 -(UIView *)addBlocksFromArray:(NSArray *)theArray ToGrid:(UIView *)theGrid;
 -(NSArray *)generateArrayOfFilledBlocksForRows:(int)rows andColumns:(int)columns;
+-(NSArray *)generateBlockPlacementArrayForLevelWithColumns:(int)columnCount andRows:(int)rowCount;
+
+-(NSArray *)generateRandomBlockPlacements;
 
 
 -(IBAction)didTapGridButton:(id)sender;
 -(IBAction)submitButtonTapped:(id)sender;
 
 -(void)startRound;
--(BOOL)checkIfGameWonWithAnswers:(NSArray *)answersArray andPlacings:(NSArray *)placingsArray;
+-(BOOL)checkIfGameWonWithAnswers:(NSMutableArray *)answersArray andPlacings:(NSArray *)placingsArray;
 -(void)shouldLevelIncrease;
 -(BOOL)shouldNewRoundStart;
 -(BOOL)wasGameLost;

@@ -12,6 +12,41 @@
 
 #pragma mark - Tests
 
+-(void)testBlockPlacementGeneration {
+    
+    // should generate two random placements for 3x3
+    // level 1
+    
+    int columnCount = 3;
+    int rowCount = 3;
+    
+    NSArray *blockArray = [gridVC generateBlockPlacementArrayForLevelWithColumns:columnCount andRows:rowCount];
+    int blockCount = [blockArray count];
+    
+    GHAssertEquals(blockCount, 2, @"should generate 2 elements, found %d", blockCount);
+    
+    // should generate three random placements for 4x3
+    // level 2
+    
+    gridVC.level = 2;
+    
+    // should generate four random placements for 4x4
+    // level 3
+    
+    gridVC.level = 3;    
+    
+    // should generate five random placements for 4x5
+    // level 4
+    
+    gridVC.level = 4;    
+    
+    // should generate six random placements for 4x6
+    // level 5
+    
+    gridVC.level = 5;    
+    
+}
+
 -(void)testCheckIfGameWonMethod {
     
     NSArray *blockPlacementArray = [[NSArray alloc] initWithObjects:
@@ -19,14 +54,14 @@
                                     [NSNumber numberWithInt:22],
                                     [NSNumber numberWithInt:23], nil];
     
-    NSArray *correctAnswersArray = [NSArray arrayWithArray:blockPlacementArray];
+    NSMutableArray *correctAnswersArray = [NSMutableArray arrayWithArray:blockPlacementArray];
     
-    NSArray *unsortedCorrectAnswers = [[NSArray alloc] initWithObjects:
+    NSMutableArray *unsortedCorrectAnswers = [[NSMutableArray alloc] initWithObjects:
                                        [NSNumber numberWithInt:23], 
                                        [NSNumber numberWithInt:21],
                                        [NSNumber numberWithInt:22], nil];
     
-    NSArray *incorrectPlacementArray = [[NSArray alloc] initWithObjects:
+    NSMutableArray *incorrectPlacementArray = [[NSMutableArray alloc] initWithObjects:
                                     [NSNumber numberWithInt:33], 
                                     [NSNumber numberWithInt:41],
                                     [NSNumber numberWithInt:52], nil];
@@ -64,7 +99,7 @@
                                     [NSNumber numberWithInt:22],
                                     [NSNumber numberWithInt:23], nil];
     
-    NSArray *correctAnswersArray = [NSArray arrayWithArray:blockPlacementArray];
+    NSMutableArray *correctAnswersArray = [NSMutableArray arrayWithArray:blockPlacementArray];
     
     // Test values are incremented correctly on win
     BOOL testResult = [gridVC checkIfGameWonWithAnswers:correctAnswersArray andPlacings:blockPlacementArray];
@@ -108,7 +143,7 @@
                                     [NSNumber numberWithInt:22],
                                     [NSNumber numberWithInt:23], nil];
     
-    NSArray *incorrectPlacementArray = [[NSArray alloc] initWithObjects:
+    NSMutableArray *incorrectPlacementArray = [[NSMutableArray alloc] initWithObjects:
                                         [NSNumber numberWithInt:33], 
                                         [NSNumber numberWithInt:41],
                                         [NSNumber numberWithInt:52], nil];
